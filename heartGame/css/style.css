@@ -1,0 +1,120 @@
+body {
+    position: relative; 
+    margin: 0; 
+    overflow: hidden; 
+    background: #ffebee; 
+    font-family: Arial, sans-serif;
+}
+
+#game::before {
+    content: '';
+    position: absolute;
+    top: -10px; 
+    left: 0;
+    width: 100%;
+    height: 10px; 
+    background: #ffebee;
+    z-index: 100;
+}
+
+#game { 
+    width: 100%; 
+    height: 100vh; 
+    position: relative; 
+}
+
+.heart, .bomb, .freeze { 
+    position: absolute; 
+    font-size: 30px; 
+    cursor: pointer; 
+    animation: fall linear; 
+    user-select: none;
+    transition: 
+        transform 0.2s;
+        opacity: 0.3 ease-out;
+    z-index: 1;
+}
+
+@keyframes fall {
+    from { 
+        transform: translateY(-50px); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateY(100vh); 
+        opacity: 1;
+    }
+}
+
+#score { 
+    position: fixed; 
+    top: 10px; 
+    right: 10px; 
+    font-size: 24px; 
+    color: #d32f2f; 
+    background: rgba(255, 255, 255, 0.7);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border-color: black;
+    z-index: 100;
+}
+
+#stopButt { 
+    position: fixed; 
+    top: 10px; 
+    left: 10px; 
+    font-size: 24px; 
+    background: rgba(255, 255, 255, 0.7);
+    padding: 10px 15px;
+    border-radius: 20px;
+    border-color: rgba(255, 255, 255, 0.7);
+    z-index: 100;
+    cursor: pointer;
+}
+
+/* Анимация взрыва */
+@keyframes explode {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(3); opacity: 0.8; }
+    100% { transform: scale(5); opacity: 0; }
+}
+
+.explosion {
+    position: absolute;
+    font-size: 40px;
+    animation: explode 0.5s forwards;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #ff0000;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.frozen-element {
+    filter: brightness(1.5) hue-rotate(180deg);
+    transform: scale(1.1);
+    transition: all 0.3s;
+}
+
+.frozen-element.heart {
+    color: #00a8ff !important;
+    filter: none;
+    text-shadow: 0 0 5px rgba(0, 168, 255, 0.7);
+}
+
+.frozen-particle {
+    background: #00a8ff !important;
+    box-shadow: 0 0 3px rgba(0, 168, 255, 0.7);
+}
+
+.freeze {
+    z-index: 10;
+    color: #00a8ff;
+}
