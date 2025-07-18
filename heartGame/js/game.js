@@ -38,7 +38,7 @@ function handleTouch(e) {
     }
 }
 
-// Game control functions
+
 function startGame() {
     if (!isGameRunning) {
         heartInterval = setInterval(createHeart, 800);
@@ -65,14 +65,17 @@ function stopGame() {
 // Element creation functions
 function createHeart() {
     if (isFrozen) return;
-    
+
     const heart = document.createElement('div');
     heart.className = 'heart';
     heart.innerHTML = '❤️';
     heart.style.left = `${Math.random() * 90}vw`;
-    heart.style.animationDuration = `${Math.random() * 2 + 3}s`;
-    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-    heart.style.opacity = '0';
+    
+    const duration = 4; 
+    heart.style.animationDuration = `${duration}s`;
+    heart.addEventListener('animationend', () => {
+        heart.remove();
+    });
 
     setTimeout(() => {
         heart.style.opacity = '1';
